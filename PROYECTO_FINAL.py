@@ -37,12 +37,17 @@ else:
     st.info("Selecciona el checkbox para mostrar la lista de filmes.")
 
 
-# Búsqueda por nombre
+# Búsqueda por nombre con botón
 search_name = st.sidebar.text_input("Buscar por nombre:")
-if search_name:
-    filtered_df = df[df['name'].str.contains(search_name, case=False, na=False)]
-    st.write(f"Se encontraron {len(filtered_df)} filmes.")
-    st.dataframe(filtered_df)
+search_button = st.sidebar.button("Buscar Nombre")
+
+if search_button:
+    if search_name:
+        filtered_df = df[df['name'].str.contains(search_name, case=False, na=False)]
+        st.write(f"Se encontraron {len(filtered_df)} filmes.")
+        st.dataframe(filtered_df)
+    else:
+        st.info("Escribe un nombre para buscar.")
 
 
 # Filtrar por director
@@ -80,3 +85,4 @@ with st.sidebar.form("insert_film_form"):
                 df = load_data("netflix")  
         else:
             st.error("Por favor completa todos los campos del formulario.")
+              
