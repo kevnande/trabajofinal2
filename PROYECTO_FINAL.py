@@ -47,7 +47,11 @@ if st.sidebar.button("Buscar Nombre"):
         st.info("Escribe un nombre para buscar.")
 
 
-directors = df['director'].dropna().unique().tolist()
+if 'director' in df.columns:
+    directors = df['director'].dropna().unique().tolist()
+else:
+    directors = []  # Si no existe la columna, se asigna una lista vacía
+
 selected_director = st.sidebar.selectbox("Selecciona un director", directors)
 if st.sidebar.button("Filtrar por Director"):
     if selected_director:
